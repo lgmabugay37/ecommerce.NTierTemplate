@@ -1,0 +1,33 @@
+﻿@model IQueryable<eCommerce.Model.Product>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<div>
+    @foreach (var product in Model)
+    {
+        <div class="col-md-3">
+            <img class="img img-responsive" src="~/Images/@string.Concat(product.ImageUrl, ".jpg")" />
+            <p>
+                <a href="@Url.Action("Details", "Product", new { product.ProductId })">
+                    @product.ImageUrl
+                </a>
+            </p>
+            <span class="label label-danger">@product.Price</span>
+            <br />
+
+            @using (Html.BeginForm("AddToBasket", "Home", new { product.ProductId }))
+            {
+                <button type="submit" class="btn btn-success">Add To Basket</button>
+            }
+
+
+        </div>
+    }
+
+</div>
+
+
+@Html.Partial("_LoginView")
